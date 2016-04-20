@@ -1,1 +1,23 @@
+# IDE Project Files
 .idea/*.*
+
+# Config and Htaccess Files (For Prod Environment)
+# .htaccess
+# config.php
+# 0ff!ce/config.php
+
+# System Files
+system/storage/cache/*
+!system/storage/cache/index.html
+system/logs/*
+!system/logs/index.html
+system/storage/download/*
+!system/storage/download/index.html
+system/storage/upload/*
+!system/storage/upload/index.html
+
+# Image Files
+image/cache/*
+!image/cache/index.html
+image/templates/*
+!image/templates/default.png
