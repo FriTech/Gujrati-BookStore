@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Stock in Product List</id>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>viethemes.com</author>
+
+	<file name="catalog/controller/module/bestseller.php,catalog/controller/module/latest.php,catalog/controller/module/special.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['products'][] = array(]]></search>
+			<add><![CDATA[
+				'stock'  => $result['quantity'] <= 0 ? $result['stock_status'] : ( $this->config->get('config_stock_display') ? $result['quantity'] : 'In Stock' ),
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/module/featured.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['products'][] = array(]]></search>
+			<add><![CDATA[
+				'stock'  => $product_info['quantity'] <= 0 ? $product_info['stock_status'] : ( $this->config->get('config_stock_display') ? $product_info['quantity'] : 'In Stock' ),
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/module/featured.tpl,catalog/view/theme/default/template/module/special.tpl,catalog/view/theme/default/template/module/latest.tpl,catalog/view/theme/default/template/module/bestseller.tpl,catalog/view/theme/default/template/product/product.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<p><?php echo $product['description']; ?></p>]]></search>
+			<add><![CDATA[
+				<?php if (!empty($product['stock'])) { ?>
+					<h5 class="model">&nbsp;<?php echo $product['stock']; ?></h5>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/product/category.php,catalog/controller/product/manufacturer.php,catalog/controller/product/search.php,catalog/controller/product/special.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['products'][] = array(]]></search>
+			<add><![CDATA[
+				'stock'  => $result['quantity'] <= 0 ? $result['stock_status'] : ( $this->config->get('config_stock_display') ? $result['quantity'] : 'In Stock' ),
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/product/category.tpl,catalog/view/theme/default/template/product/manufacturer_info.tpl,catalog/view/theme/default/template/product/search.tpl,catalog/view/theme/default/template/product/special.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<p><?php echo $product['description']; ?></p>]]></search>
+			<add><![CDATA[
+
+					<h5 class="model">&nbsp;<?php echo $product['stock']; ?></h5>
+
+			]]></add>
+		</operation>
+	</file>
+
+</modification>
