@@ -10,16 +10,36 @@ Options +FollowSymlinks
 Options -Indexes
 
 # Prevent Direct Access to files
-<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+<FilesMatch "(?i)(((?<!index)\.php|\.sql|\.tpl|\.xml|\.ini|\.log|(?<!robots)\.txt))">
  Order deny,allow
  Deny from all
 </FilesMatch>
+
+<Files cache.*>
+Order Deny,Allow
+Deny from all
+</Files>
 
 # SEO URL Settings
 RewriteEngine On
 # If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/
 
 RewriteBase /
+
+# Redirect admin directory access to admin sub-domain
+RedirectMatch 301 ^/0ff\!ce/(.*)$ https://www.office.sahityasrushti.com/$1
+
+# Redirect Non-HTTPS OR Non-WWW requests for admin sub-domain to HTTPS, WWW
+RewriteCond %{HTTP_HOST} office\.sahityasrushti\.com$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule .* https://www.office.sahityasrushti.com%{REQUEST_URI} [L,R=301]
+
+# Redirect Non-WWW requests for store to HTTP, WWW
+RewriteCond %{HTTP_HOST} !office\.sahityasrushti\.com$ [NC]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule .* http://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
 RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
 RewriteRule ^system/download/(.*) index.php?route=error/not_found [L]

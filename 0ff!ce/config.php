@@ -1,11 +1,11 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/Gujrati-BookStore/0ff!ce/');
-define('HTTP_CATALOG', 'http://localhost/Gujrati-BookStore/');
+define('HTTP_SERVER', 'https://www.office.sahityasrushti.com/');
+define('HTTP_CATALOG', 'http://www.sahityasrushti.com/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/Gujrati-BookStore/0ff!ce/');
-define('HTTPS_CATALOG', 'http://localhost/Gujrati-BookStore/');
+define('HTTPS_SERVER', 'https://www.office.sahityasrushti.com/');
+define('HTTPS_CATALOG', 'http://www.sahityasrushti.com/');
 
 // DIR
 define('DIR_APPLICATION', 'C:/wamp/www/Gujrati-BookStore/0ff!ce/');
